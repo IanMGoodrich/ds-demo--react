@@ -1,0 +1,185 @@
+:root {
+  --ff-melodrama: 'Melodrama';
+  --ff-manrope: 'Manrope';
+  --ff-nippo: 'Nippo';
+  --ff-teko: 'Teko';
+  --ff-satoshi: 'Satoshi';
+  --ff-satoshi-it: 'Satoshi-It';
+  --ff-bespoke-sans: 'Bespoke-Sans';
+  --ff-bespoke-sans-it: 'Bespoke-Sans-It';
+  --ff-bespoke-serif: 'Bespoke-Serif';
+  --ff-bespoke-serif-it: 'Bespoke-Serif-It';
+
+  /* Container Widths */
+  --container-max-width-default: 1400px;
+  --container-max-width-narrow: 1220px;
+  --container-max-width-full-bleed: 100vw;
+
+  /* Font Sizes: Clamped to 640px - 1440px */
+
+  /* 10px - 12px */
+  --fs-legal: clamp(0.625rem, 0.525rem + 0.25vw, 0.75rem);
+  /* 14px - 16px */
+  --fs-eyebrow: clamp(0.875rem, 0.775rem + 0.25vw, 1rem);
+  /* 16px - 20px */
+  --fs-body: clamp(1rem, 0.8rem + 0.5vw, 1.25rem);
+  /* 14px */
+  --fs-static-14: 14px;
+
+  
+  /* 18px - 22px */
+  --fs-heading-6: clamp(1.125rem, 0.925rem + 0.5vw, 1.375rem);
+  /* 20px - 26px */
+  --fs-heading-5: clamp(1.25rem, 0.95rem + 0.75vw, 1.625rem);
+  /* 24px - 32px */
+  --fs-heading-4: clamp(1.5rem, 1.1rem + 1vw, 2rem);
+  /* 30px - 48px */
+  --fs-heading-3: clamp(1.875rem, 0.975rem + 2.25vw, 3rem);
+  /* 38px - 56px */
+  --fs-heading-2: clamp(2.375rem, 1.475rem + 2.25vw, 3.5rem);
+  /* 44px - 66px */
+  --fs-heading-1: clamp(2.75rem, 1.65rem + 2.75vw, 4.125rem);
+
+  /* General Colors */
+  --cl-charcoal-darkest: #141414;
+  --cl-charcoal-lighter: #5E5B5B;
+  --cl-lavender-lightest: #fbfaff;
+  --cl-chartreuse-lightest: #E5FFEE;
+  --cl-lemon-lightest: #c2c2bc;
+  --cl-white: #ffff;
+  --cl-display-dull: #bab08d;
+  --cl-golden: #FECF49;
+  --cl-golden-light: #FEE7A9;
+  --cl-orange-hot: #CA3D21;
+  --cl-red-vibrant: #ED0707;
+  --cl-red-light: #FDE8E8;
+  --cl-hot-pink: #F05177;
+  --cl-powder-blue: #4287f5;
+  --cl-powder-blue-light: #CBFEFB;
+  --cl-powder-blue-dark: #336AB8;
+  --cl-blue-vibrant: #1D28FC;
+  --cl-blue-lavender: #543DFF;
+  --cl-green-dark: #017803;
+  --cl-monitor-dark-green: #22c55e;
+  --cl-monitor-black-green: #1f2937;
+  --cl-mint-pale: #cefee2;
+  --cl-text-default-dark: var(--cl-charcoal-darkest);
+  --cl-text-default-light: var(--cl-lavender-lightest);
+  
+  /* Fluid Spacing: Names in relation to min/max rem sizes by way of percentage. For example 100-350 means 1rem - 3.5rem*/
+  --spacing-100-175: clamp(1rem, 0.4rem + 1.5vw, 1.75rem);
+  --spacing-75-125: clamp(0.75rem, 0.35rem + 1vw, 1.25rem);
+  --spacing-50-100: clamp(0.5rem, 0.1rem + 1vw, 1rem);
+  
+  
+/* Theme Specific */
+
+/* Default */
+  /* Palette */
+  --cl-bold-primary-default: var(--cl-red-vibrant);
+  --cl-bold-secondary-default: var(--cl-green-dark);
+  --cl-bold-tertiary-default: var(--cl-blue-vibrant);
+  --cl-light-primary-default: var(--cl-powder-blue-light);
+  --cl-light-secondary-default: var(--cl-mint-pale);
+  --cl-light-tertiary-default: var(--cl-red-light);
+  --cl-accent-primary-default: var();
+  --cl-accent-secondary-default: var();
+  --cl-accent-tertiary-default: var(--cl-white);
+  --cl-background-primary-default: var(--cl-white);
+  --cl-border-default: var(--cl-charcoal-darkest);
+  --cl-svg-default: var(--cl-charcoal-darkest);
+
+  /* Typography */
+    /* Font and Weight */
+    --heading-font-default: var(--ff-bespoke-serif);
+    --heading-font-weight-default: 550;
+    --heading-font-weight-light-default: 450;
+    --body-font-default: var(--ff-bespoke-sans);
+    --body-font-weight-default: 350;
+    --body-font-weight-light-default: 300;
+    --link-font-weight-default: 500;
+
+    /* Color */
+    --heading-color-default: var(--cl-red-vibrant);
+    --body-color-default: var(--cl-text-default-dark);
+
+  /* Static characteristics */
+  --border-radius-default: 12px;
+  --border-width-default: 2px;
+  --outline-offset-default: 2px;
+  --outline-width-default: 2px;
+  --action-duration-primary-default: 0.4s;
+
+/* Sprawl */
+  /* Palette */
+  --cl-bold-primary-sprawl: var(--cl-monitor-dark-green);
+  --cl-bold-secondary-sprawl: var(--cl-monitor-black-green);
+  --cl-bold-tertiary-sprawl: var(--cl-golden);
+  --cl-light-primary-sprawl: var(--cl-display-dull);
+  --cl-light-secondary-sprawl: var(--cl-lemon-lightest);
+  --cl-light-tertiary-sprawl: var();
+  --cl-accent-primary-sprawl: var();
+  --cl-accent-secondary-sprawl: var();
+  --cl-accent-tertiary-sprawl: var();
+  --cl-background-primary-sprawl: var(--cl-charcoal-darkest);
+  --cl-svg-sprawl: var(--cl-display-dull);
+  --cl-border-sprawl: var(--cl-lemon-lightest);
+
+  /* Typography */
+    /* Font and Weight */
+    --heading-font-sprawl: var(--ff-nippo);
+    --heading-font-weight-sprawl: 600;
+    --heading-font-weight-light-sprawl: 500;
+    --body-font-sprawl: var(--ff-teko);
+    --body-font-weight-sprawl: 400;
+    --body-font-weight-light-sprawl: 300;
+    --link-font-weight-sprawl: 500;
+
+    /* Color */
+    --heading-color-sprawl: var(--cl-display-dull);
+    --body-color-sprawl: var(--cl-display-dull);
+
+  /* Static characteristics */
+  --border-radius-sprawl: 4px;
+  --border-width-sprawl: 1px;
+  --outline-offset-sprawl: 1px;
+  --outline-width-sprawl: 1px;
+  --action-duration-primary-sprawl: 0.2s;
+
+/* Floral */
+  /* Palette */
+  --cl-bold-primary-floral: var(--cl-orange-hot);
+  --cl-bold-secondary-floral: var(--cl-powder-blue-dark);
+  --cl-bold-tertiary-floral: var(--cl-blue-lavender);
+  --cl-light-primary-floral: var(--cl-chartreuse-lightest);
+  --cl-light-secondary-floral: var(--cl-powder-blue-light);
+  --cl-light-tertiary-floral: var(--cl-golden-light);
+  --cl-accent-primary-floral: var(--cl-green-dark);
+  --cl-accent-secondary-floral: var(--cl-powder-blue-dark);
+  --cl-accent-tertiary-floral: var(--cl-hot-pink);
+  --cl-background-primary-floral: var(--cl-light-primary-floral);
+  --cl-border-floral: var(--cl-bold-primary-floral);
+  --cl-svg-floral: var(--cl-bold-primary-floral);
+
+  /* Typography */
+    /* Font and Weight */
+    --heading-font-floral: var(--ff-melodrama);
+    --heading-font-weight-floral: 700;
+    --heading-font-weight-light-floral: 550;
+    --body-font-floral: var(--ff-manrope);
+    --body-font-weight-floral: 450;
+    --body-font-weight-light-floral: 350;
+    --link-font-weight-floral: 600;
+
+    /* Color */
+    --heading-color-floral: var(--cl-bold-primary-floral);
+    --body-color-floral: var(--cl-text-default-dark);
+
+  /* Static characteristics */
+  --border-radius-floral: 8px;
+  --border-width-floral: 2px;
+  --outline-offset-floral: 2px;
+  --outline-width-floral: 2px;
+  --action-duration-primary-floral: 0.7s;
+}       
+        
