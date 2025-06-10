@@ -1,0 +1,136 @@
+[element-theme='floral'] {
+  --eyebrow-size: var(--fs-eyebrow);
+  --eyebrow-color: var(--heading-color-floral);
+  --eyebrow-font: var(--body-font-floral);
+  --eyebrow-weight: var(--body-font-weight-light-floral);
+  --heading-color: var(--heading-color-floral);
+  --heading-font: var(--heading-font-floral);
+  --heading-size: var(--fs-heading-3);
+  --heading-weight: var(--heading-font-weight-floral);
+  --description-font: var(--body-font-floral);
+  --description-size: var(--fs-body); 
+  --description-color: var(--body-color-flora);
+  --description-weight: var(--body-font-weight-floral);
+  --cta-weight: var(--heading-font-weight-light-floral);
+  --background-color: var(--cl-background-primary-floral);
+  --border-radius: 8px;
+  --border-width: 2px;
+  --border-color: var(--cl-border-floral);
+  --duration-time: var(--action-duration-primary-floral);
+}
+
+[element-theme='sprawl'] {
+  --eyebrow-size: var(--fs-eyebrow);
+  --eyebrow-font: var(--body-font-sprawl);
+  --eyebrow-color: var(--heading-color-sprawl);
+  --eyebrow-weight: var(--body-font-weight-light-sprawl);
+  --heading-color: var(--heading-color-sprawl);
+  --heading-font: var(--heading-font-sprawl);
+  --heading-size: var(--fs-heading-3);
+  --heading-weight: var(--heading-font-weight-sprawl);
+  --description-font: var(--body-font-sprawl);
+  --description-size: var(--fs-body);
+  --description-color: var(--body-color-sprawl);
+  --description-weight: var(--body-font-weight-sprawl);
+  --cta-weight: var(--heading-font-weight-light-sprawl);
+  --background-color: var(--cl-background-primary-sprawl);
+  --border-color: var(--cl-border-sprawl);
+  --border-width: 1px;
+  --border-radius: 0px;
+  --duration-time: var(--action-duration-primary-sprawl);
+}
+
+[element-theme='default'] {
+  --eyebrow-size: var(--fs-eyebrow);
+  --eyebrow-font: var(--heading-font-default);
+  --eyebrow-color: var(--body-color-default);
+  --eyebrow-weight: var(--body-font-weight-light-default);
+  --heading-color: var(--heading-color-default);
+  --heading-size: var(--fs-heading-3);
+  --heading-font: var(--heading-font-default);
+  --heading-weight: var(--heading-font-weight-default);
+  --description-font: var(--body-font-default); 
+  --description-size: var(--fs-body);
+  --description-color: var(--body-color-default);
+  --description-weight: var(--body-font-weight-default);
+  --cta-weight: var(--heading-font-weight-light-default);
+  --background-color: var(--cl-background-primary-default);
+  --border-radius: 4px;
+  --border-width: 2px;
+  --border-color: var(--cl-border-default);
+  --duration-time: var(--action-duration-primary-default);
+}
+
+.img-basic-card {
+  display: flex;
+  flex-direction: column;
+  max-width: 450px;
+  position: relative;
+  padding: var(--spacing-100-175);
+  background-color: var(--background-color);
+  border: var(--border-width) var(--border-color) solid;
+  border-radius: var(--border-radius);
+}
+
+.img-basic-card--main-content {
+  display: grid;
+  height: 100%;
+}
+
+.eyebrow {
+  font-size: var(--eyebrow-size);
+  color: var(--eyebrow-color);
+  font-family: var(--description-font);
+  text-transform: uppercase;
+  font-weight: var(--eyebrow-weight);
+  margin: 0px;
+}
+
+.heading {
+  line-height: var(--heading-line-height);
+  padding: .25rem 0;
+  font-size: var(--heading-size);
+  color: var(--heading-color);
+  font-family: var(--heading-font);
+  font-weight: var(--heading-weight);
+  margin: 0px;
+}
+
+.description {
+  font-size: var(--description-size);
+  font-family: var(--description-font);
+  color: var(--description-color);
+  font-weight: var(--description-weight);
+}
+
+.image {
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+  padding-top: .5rem;
+}
+
+.primary-link {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin-top: auto;
+
+  &.silent {
+    &::before { 
+      display: flex;
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+  
+    &:focus {
+      outline: none;
+      &::before {
+        outline: solid 2px var(--border-color);
+        outline-offset: 4px;
+      }
+    }
+  }
+}
