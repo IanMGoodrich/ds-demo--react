@@ -87,8 +87,8 @@
 }
 
 .heading {
-  line-height: var(--heading-line-height);
-  padding: .25rem 0;
+  line-height: 1;
+  padding-bottom: 0.25rem;
   font-size: var(--heading-size);
   color: var(--heading-color);
   font-family: var(--heading-font);
