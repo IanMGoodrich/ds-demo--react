@@ -1,0 +1,20 @@
+.img-jump-nav {
+  display: flex;
+  position: sticky;
+  top: var(--top-offset);
+  justify-content: space-between;
+  padding: var(--spacing-100-175);
+  background-color: white;
+  border-bottom: solid 2px black;
+}
+
+.img-jump-nav--list {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  list-style: none;
+}
+
+.img-jump-nav--item [aria-current='page'] {
+  border-bottom: solid 2px red;
+}
