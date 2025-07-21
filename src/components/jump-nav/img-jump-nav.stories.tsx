@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import ImgJumpNav from './img-jump-nav';
-import type  { JumpNavProps } from './img-jump-nav';
+import { sharedThemes } from "../../utilities/types"
+import type { JumpNavProps } from './img-jump-nav';
 
 type SimpleArgs = JumpNavProps & { sticky: boolean };
 
@@ -61,6 +62,12 @@ const meta: Meta<SimpleArgs> = {
         disable: true
       }
      },
+     theme: {
+      options: sharedThemes,
+      control: {
+        type: 'select'
+      }
+    }
   },
   args: {
     sticky: true,
@@ -74,11 +81,11 @@ type Story = StoryObj<SimpleArgs>;
 
 
 export const Simple: Story = {
-  render: ({ slug, sticky }) => (
+  render: ({ slug, sticky, theme }) => (
   <div>
     <header id={sticky ? 'header' : 'not-sticky' } style={{ position: sticky ? 'sticky' : 'relative', top: 0,height: '150px', width: '100%', backgroundColor: 'blue', justifyContent: 'center' }}> <p>HEADER</p></header>
     <main>
-      <ImgJumpNav slug={slug} headerId={sticky ? 'header' : undefined} />
+      <ImgJumpNav slug={slug} headerId={sticky ? 'header' : undefined} theme={theme}/>
         <section >
           <p style={{fontSize: '20px', lineHeight:'1.1', padding: '1rem'}}>
             Vestibulum ante ipsum primis in faucibus orci luctus… Etiam accumsan urna a mauris dapibus, nec aliquet nunc convallis. Phasellus eget justo et libero ultrices posuere. Cras euismod, arcu nec congue convallis, ipsum nunc cursus nibh, vel condimentum sapien orci non libero. Integer ullamcorper felis sit amet felis placerat, eu convallis lorem iaculis.

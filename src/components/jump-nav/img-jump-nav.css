@@ -1,20 +1,40 @@
 .img-jump-nav {
   display: flex;
+  flex-direction: column;
   position: sticky;
   top: var(--top-offset);
   justify-content: space-between;
   padding: var(--spacing-100-175);
   background-color: white;
   border-bottom: solid 2px black;
+
+  &[mobile-open='mobile-open'] {
+    .img-jump-nav--list {
+      display: flex;
+    }
+  }
 }
 
 .img-jump-nav--list {
-  display: flex;
+  display: none;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
   list-style: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
 .img-jump-nav--item [aria-current='page'] {
   border-bottom: solid 2px red;
 }
+
+.img-jump-nav--mobile-button {
+  width: 100%;
+  border-radius: 0px;
+}
+
+

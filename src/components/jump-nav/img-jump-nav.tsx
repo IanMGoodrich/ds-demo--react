@@ -5,8 +5,9 @@ import React, {
   useCallback,
 } from 'react';
 import './img-jump-nav.css';
+import { useMediaQuery } from '../../utilities/mediaQuery';
 import { seed } from '../../utilities/methods';
-
+import type { Theme } from '../../utilities/types';
 export interface JumpNavJump {
   id: string;
   label: string;
@@ -15,15 +16,18 @@ export interface JumpNavJump {
 export interface JumpNavProps {
   slug: string;
   headerId?: string;
+  theme: Theme;
 }
 
 interface InfoState {
   topOffset: number;
   navHeightOffset: number;
   activeEl: string;
+  mobileLabel: string;
 }
 
-const ImgJumpNav: React.FC<JumpNavProps> = ({ slug, headerId }) => {
+const ImgJumpNav: React.FC<JumpNavProps> = ({ slug, headerId, theme }) => {
+  const isMobile = !useMediaQuery('(min-width: 768px)');
   const headerRef = useRef<HTMLElement | null>(null);
   const selfRef   = useRef<HTMLElement | null>(null);
   const targetsRef = useRef<NodeListOf<HTMLElement> | null>(null);
@@ -32,10 +36,18 @@ const ImgJumpNav: React.FC<JumpNavProps> = ({ slug, headerId }) => {
     topOffset: 0,
     navHeightOffset: 0,
     activeEl: '',
+    mobileLabel: 'Scroll to',
   });
 
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [info, setInfo] = useState<InfoState>(infoRef.current);
   const [jumps, setJumps] = useState<JumpNavJump[]>([]);
+
+  useEffect(() => {
+    if (isMobile && mobileOpen) {
+      return selfRef.current?.setAttribute('mobile-open', 'mobile-open')
+    } return selfRef.current?.removeAttribute('mobile-open')
+  }, [mobileOpen, isMobile])
 
   useEffect(() => {
     infoRef.current = info;
@@ -75,24 +87,30 @@ const ImgJumpNav: React.FC<JumpNavProps> = ({ slug, headerId }) => {
       );
     };
 
-    updateOffset();
+  updateOffset();
     const ro = new ResizeObserver(updateOffset);
     if (headerRef.current) ro.observe(headerRef.current);
     if (selfRef.current) ro.observe(selfRef.current);
     return () => ro.disconnect();
   }, [slug, headerId]);
 
+  const toggleMobileMenu = () => {
+    return setMobileOpen(!mobileOpen)
+  }
+
   const updateActiveTab = useCallback(() => {
     const { topOffset, navHeightOffset, activeEl } = infoRef.current;
     const threshold = topOffset + navHeightOffset + 32;
     let newActive = '';
+    let newMobileLabel = ''
     
     const targets = targetsRef.current;
     if (targets && targets.length) {
       // pick the last section whose top is above the threshold
       targets.forEach(el => {        
         if (el.getBoundingClientRect().top < threshold + (el.offsetHeight * .1)) {
-          newActive = `#${el.id}`;
+          newActive = `#${el.id}`;          
+          newMobileLabel = el.getAttribute('data-link') ?? '';
         }
       });
 
@@ -105,6 +123,9 @@ const ImgJumpNav: React.FC<JumpNavProps> = ({ slug, headerId }) => {
 
     if (newActive !== activeEl) {
       setInfo(prev => ({ ...prev, activeEl: newActive }));
+      if (newMobileLabel !== '') {
+        setInfo(prev => ({ ...prev, mobileLabel: newMobileLabel }));
+      }
     }
   }, []);
 
@@ -142,10 +163,14 @@ const ImgJumpNav: React.FC<JumpNavProps> = ({ slug, headerId }) => {
           8,
         behavior: 'smooth',
       });
+
+      if (isMobile) {
+        setMobileOpen(false);
+      }
     },
     []
   );
-
+  
   return (
     <nav
       ref={selfRef}
@@ -156,6 +181,14 @@ const ImgJumpNav: React.FC<JumpNavProps> = ({ slug, headerId }) => {
         { ['--top-offset' as string]: `${info.topOffset}px` } as React.CSSProperties
       }
     >
+      { isMobile && 
+        <button
+          className={`img-jump-nav--mobile-button primary-button ${theme}`}
+          onClick={toggleMobileMenu}
+        >
+          {info.mobileLabel}
+        </button> 
+      }
       <ul className="img-jump-nav--list">
         {jumps.map(({ id, label }) => (
           <li key={`${id}-${seed}`} className="img-jump-nav--item">
