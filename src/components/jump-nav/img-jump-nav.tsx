@@ -177,6 +177,7 @@ const ImgJumpNav: React.FC<JumpNavProps> = ({ slug, headerId, theme }) => {
       id={`jump-nav-${seed}`}
       className="img-jump-nav"
       aria-label="jump navigation"
+      element-theme={theme}
       style={
         { ['--top-offset' as string]: `${info.topOffset}px` } as React.CSSProperties
       }

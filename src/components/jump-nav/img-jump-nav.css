@@ -1,3 +1,45 @@
+[element-theme='floral'] {
+  --label-color: var(--body-color-floral);
+  --label-font: var(--body-font-floral);
+  --label-size: var(--fs-body);
+  --label-weight: var(--body-font-weight-floral);
+  --label-weight-active: var(--link-font-weight-floral);
+  --label-color-active: var(--cl-bold-secondary-floral);
+  --background-color: var(--cl-background-primary-floral);
+  --active-border-width: 2px;
+  --active-border-color: var(--cl-bold-primary-floral);
+  --nav-border-width: 2px;
+  --nav-border-color: var(--cl-border-floral);
+}
+
+[element-theme='sprawl'] {
+  --label-color: var(--body-color-sprawl);
+  --label-font: var(--body-font-sprawl);
+  --label-size: var(--fs-body);
+  --label-weight: var(--body-font-weight-sprawl);
+  --label-weight-active: var(--link-font-weight-sprawl);
+  --label-color-active: var(--cl-bold-tertiary-sprawl);
+  --background-color: var(--cl-background-primary-sprawl);
+  --active-border-width: 2px;
+  --active-border-color: var(--cl-bold-primary-sprawl);
+  --nav-border-width: 2px;
+  --nav-border-color: var(--cl-border-sprawl);
+}
+
+[element-theme='default'] {
+  --label-color: var(--body-color-default);
+  --label-size: var(--fs-body);
+  --label-font: var(--body-font-default);
+  --label-weight: var(--body-font-weight-default);
+  --label-weight-active: var(--link-font-weight-default);
+  --label-color-active: var(--cl-bold-secondary-default);
+  --background-color: var(--cl-background-primary-default);
+  --active-border-width: 2px;
+  --active-border-color: var(--cl-bold-primary-default);
+  --nav-border-width: 2px;
+  --nav-border-color: var(--cl-border-default);
+}
+
 .img-jump-nav {
   display: flex;
   flex-direction: column;
@@ -5,8 +47,8 @@
   top: var(--top-offset);
   justify-content: space-between;
   padding: var(--spacing-100-175);
-  background-color: white;
-  border-bottom: solid 2px black;
+  background-color: var(--background-color);
+  border-bottom: solid var(--nav-border-color) var(--nav-border-width);
 
   &[mobile-open='mobile-open'] {
     .img-jump-nav--list {
@@ -28,8 +70,16 @@
   }
 }
 
+.img-jump-nav--item {
+  font-size: var(--label-size);
+  font-family: var(--label-font);
+  font-weight: var(--label-weight);
+  color: var(--label-color);
+}
 .img-jump-nav--item [aria-current='page'] {
-  border-bottom: solid 2px red;
+  font-weight: var(--label-weight-active);
+  color: var(--label-color-active);
+  border-bottom: solid var(--active-border-color) var(--active-border-width);
 }
 
 .img-jump-nav--mobile-button {
