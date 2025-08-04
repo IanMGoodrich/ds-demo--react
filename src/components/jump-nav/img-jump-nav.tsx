@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import './img-jump-nav.css';
 import { useMediaQuery } from '../../utilities/mediaQuery';
-import { seed } from '../../utilities/methods';
+import { generateSeed } from '../../utilities/methods';
 import type { Theme } from '../../utilities/types';
 export interface JumpNavJump {
   id: string;
@@ -27,10 +27,12 @@ interface InfoState {
 }
 
 const ImgJumpNav: React.FC<JumpNavProps> = ({ slug, headerId, theme }) => {
-  const isMobile = !useMediaQuery('(min-width: 768px)');
+  const isMobile = useMediaQuery('(min-width: 768px)');
   const headerRef = useRef<HTMLElement | null>(null);
   const selfRef   = useRef<HTMLElement | null>(null);
   const targetsRef = useRef<NodeListOf<HTMLElement> | null>(null);
+  const observerRef = useRef<ResizeObserver | null>(null);
+  const seed = generateSeed();
 
   const infoRef = useRef<InfoState>({
     topOffset: 0,
@@ -66,32 +68,37 @@ const ImgJumpNav: React.FC<JumpNavProps> = ({ slug, headerId, theme }) => {
     const list: JumpNavJump[] = [];
     targetsRef.current.forEach(el => {
       const label = el.dataset.link?.trim();
-      const id    = el.id.trim();
+      const id = el.id.trim();
       if (label && id) list.push({ id: `#${id}`, label });
     });
     setJumps(list);
-  }, [slug, headerId]);
+  }, [slug, headerId, seed]);
 
   useEffect(() => {
     const updateOffset = () => {
-      const topOffset =
-        headerRef.current?.getBoundingClientRect().height ?? 0;
-      const navHeightOffset =
-        selfRef.current?.getBoundingClientRect().height ?? 0;
-
+      const topOffset = headerRef.current?.getBoundingClientRect().height ?? 0;
+      const navHeightOffset = selfRef.current?.getBoundingClientRect().height ?? 0;
       setInfo(prev =>
-        prev.topOffset === topOffset &&
-        prev.navHeightOffset === navHeightOffset
+        prev.topOffset === topOffset && prev.navHeightOffset === navHeightOffset
           ? prev
           : { ...prev, topOffset, navHeightOffset }
       );
     };
 
-  updateOffset();
-    const ro = new ResizeObserver(updateOffset);
-    if (headerRef.current) ro.observe(headerRef.current);
-    if (selfRef.current) ro.observe(selfRef.current);
-    return () => ro.disconnect();
+    if (!observerRef.current) {
+      observerRef.current = new ResizeObserver(updateOffset);
+    } else {
+      observerRef.current.disconnect();
+    }
+
+    if (headerRef.current) observerRef.current.observe(headerRef.current);
+    if (selfRef.current) observerRef.current.observe(selfRef.current);
+
+    updateOffset();
+
+    return () => {
+      observerRef.current?.disconnect();
+    };
   }, [slug, headerId]);
 
   const toggleMobileMenu = () => {
@@ -127,7 +134,7 @@ const ImgJumpNav: React.FC<JumpNavProps> = ({ slug, headerId, theme }) => {
         setInfo(prev => ({ ...prev, mobileLabel: newMobileLabel }));
       }
     }
-  }, []);
+  }, [infoRef, targetsRef]);
 
   useEffect(() => {
     let ticking = false;
@@ -168,7 +175,7 @@ const ImgJumpNav: React.FC<JumpNavProps> = ({ slug, headerId, theme }) => {
         setMobileOpen(false);
       }
     },
-    []
+    [isMobile, infoRef]
   );
   
   return (
