@@ -1,1 +1,3 @@
-export const seed : string = crypto.randomUUID();
+export function generateSeed(): string {
+  return crypto.randomUUID();
+}
