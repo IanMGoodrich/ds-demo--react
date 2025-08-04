@@ -16,16 +16,36 @@ interface IImgBasicCardProps {
 
 
 const ImgBasicCard: React.FunctionComponent<IImgBasicCardProps> = (props) => {
-  useEffect(() => setSilentLink(props), []);
-  const anchorRef = useRef(null);
-
+  const anchorRef = useRef<HTMLAnchorElement>(null);
+  
   // if linkUrl and no linkText will make entire card clickable
   const setSilentLink = (props:IImgBasicCardProps) => {    
     if (props.linkUrl && !props.linkText) {
-      const anchor = anchorRef.current as unknown as HTMLAnchorElement;
+      const anchor = anchorRef.current;
       anchor?.classList.add('silent')
     }
   }
+  
+  const generateLinkButtonMarkup = (props: IImgBasicCardProps) => {
+    if (props.linkUrl) {
+      return (
+        <a className="primary-link" ref={anchorRef} href={props.linkUrl} aria-label={props.linkText ? props.linkText : props.heading}>
+          { props?.linkText}
+        </a>
+      )
+    }
+    if (props.linkText && props.buttonOnClick) {
+      return (
+        <button className="primary-button" 
+          onClick={props.buttonOnClick}>
+          {props.linkText}
+        </button>
+      )
+    }
+  }
+  
+  useEffect(() => setSilentLink(props), [props]);
+
   return (
     <section className="img-basic-card" element-theme={props.theme}>
       <div className="img-basic-card--top-content">
@@ -35,19 +55,7 @@ const ImgBasicCard: React.FunctionComponent<IImgBasicCardProps> = (props) => {
       </div>
       <div className="img-basic-card--main-content">
         <p className="description">{props.description}</p>
-        { props.linkUrl && (
-          <a className="primary-link" ref={anchorRef} href={props.linkUrl}>
-            { props?.linkText}
-          </a>
-        )}
-        {
-          props.linkText && props.buttonOnClick && !props.linkUrl && (
-            <button className="primary-button" 
-              onClick={props.buttonOnClick}>
-              {props.linkText}
-            </button>
-          )
-        }
+        {generateLinkButtonMarkup(props)}
       </div>
     </section>
   ) ;
